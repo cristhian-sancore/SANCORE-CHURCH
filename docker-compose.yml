@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: sancore_db
+    restart: always
+    environment:
+      POSTGRES_USER: sancore_admin
+      POSTGRES_PASSWORD: sancore_password123
+      POSTGRES_DB: sancore_saas
+    ports:
+      - "5432:5432"
+    volumes:
+      - sancore_pgdata:/var/lib/postgresql/data
+    networks:
+      - sancore_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: sancore_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@sancore.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - sancore_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: sancore_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - sancore_redisdata:/data
+    networks:
+      - sancore_network
+
+volumes:
+  sancore_pgdata:
+  sancore_redisdata:
+
+networks:
+  sancore_network:
+    driver: bridge
