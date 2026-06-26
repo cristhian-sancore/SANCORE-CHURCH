@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.core.config import settings
 from app.core.database import engine, Base
 from app.models import tenant, user # Carregar os models
-from app.routers import auth
+from app.routers import auth, tenant as tenant_router
 
 # Cria as tabelas iniciais
 Base.metadata.create_all(bind=engine)
@@ -14,6 +14,7 @@ app = FastAPI(
 )
 
 app.include_router(auth.router)
+app.include_router(tenant_router.router)
 
 @app.get("/")
 def read_root():

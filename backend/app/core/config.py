@@ -7,6 +7,16 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7 # 1 semana
 
+    # Cloudflare
+    CLOUDFLARE_API_TOKEN: str = ""
+    CLOUDFLARE_ZONE_ID: str = ""
+    CLOUDFLARE_ACCOUNT_ID: str = ""
+    SAAS_DOMAIN: str = "sancore.com.br"
+
+    # Mercado Pago
+    MP_ACCESS_TOKEN: str = ""
+    MP_PUBLIC_KEY: str = ""
+
     class Config:
         env_file = ".env"
 
