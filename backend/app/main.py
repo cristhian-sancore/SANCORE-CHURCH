@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.core.config import settings
 from app.core.database import engine, Base
-from app.models import tenant, user # Carregar os models
+from app.models import tenant, user, member, finance, cell, event # Carregar os models
 from app.routers import auth, tenant as tenant_router
 
 # Cria as tabelas iniciais
